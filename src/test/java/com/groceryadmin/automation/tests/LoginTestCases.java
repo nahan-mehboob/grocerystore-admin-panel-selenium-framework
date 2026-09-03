@@ -1,6 +1,6 @@
 package com.groceryadmin.automation.tests;
 
-import java.util.List;
+import java.io.File;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -9,12 +9,12 @@ import org.testng.annotations.Test;
 import com.groceryadmin.automation.constants.Constants;
 import com.groceryadmin.automation.pages.*;
 import com.groceryadmin.automation.base.BaseTest;
+import com.groceryadmin.automation.utils.ExcelUtils;
 
 public class LoginTestCases extends BaseTest{
-
 	LoginPage lp;
 
-	@Test(priority=1, description="Validating the profile name of logged user",groups = {"smoke"})
+	@Test(priority=1, description="Validating the profile name of logged user")
 	public void loggedInProfileNameValidation() {
 		lp = new LoginPage(driver);
 		lp.presteps();
@@ -23,10 +23,9 @@ public class LoginTestCases extends BaseTest{
 		Assert.assertEquals(actualProfileName, expectedProfileName,Constants.LOGIN_ERROR);
 	}
 
-	@Test(priority = 2, description="Login using data provider", dataProvider = "data", groups = {"regression"})
+	@Test(priority = 2, description="Login using data provider", dataProvider = "data")
 	public void loginFailureWithInvalidCredentials(String username, String password) {
 		lp = new LoginPage(driver);
-		//lp.presteps();
 		lp.getUserName(username);
 		lp.getPassword(password);
 		lp.clickSignin();
@@ -34,7 +33,7 @@ public class LoginTestCases extends BaseTest{
 		Assert.assertTrue(actualResult,Constants.LOGIN_ERROR);
 	}
 
-	@Test(priority=3, description="Validating color property of profile name", groups = {"sanity"})
+	@Test(priority=3, description="Validating color property of profile name")
 	public void profileNameStyleValidation() {
 		lp = new LoginPage(driver);
 		lp.presteps();
@@ -43,7 +42,7 @@ public class LoginTestCases extends BaseTest{
 		Assert.assertEquals(actualProfileColor, expectedProfileClr,Constants.STYLE_ERROR);
 	}
 
-	@Test(priority = 4, description = "Validating whether remember checkbox is unchecked", groups = {"sanity"})
+	@Test(priority = 4, description = "Validating whether remember checkbox is unchecked")
 	public void validationOfRememberMeCheckbox() {
 		lp = new LoginPage(driver);
 		lp.getUserName("admin");
@@ -53,11 +52,10 @@ public class LoginTestCases extends BaseTest{
 		Assert.assertEquals(actualStatus, expectedStatus,Constants.CHECKBOX_ERROR);
 	}
 
-	@Test(priority=5, description="Login using excel data", dataProvider = "excelData", groups = {"regression"})
-	public void excelRead() {
+	@Test(priority=5, description="Login using excel data", dataProvider = "excelData")
+	public void excelRead(String username, String password) {
 		lp = new LoginPage(driver);
-		List<String> loginList = lp.getLoginDetails();
-		lp.excelSteps(loginList.get(0), loginList.get(1));
+		lp.excelSteps(username, password);
 		String expectedProfileName = Constants.EXPECTED_PROFILE_NAME;
 		String actualProfileName = lp.profileNameVerification();
 		Assert.assertEquals(actualProfileName, expectedProfileName,Constants.LOGIN_ERROR);
@@ -72,8 +70,10 @@ public class LoginTestCases extends BaseTest{
 		};
 	}
 
+	@DataProvider(name = "excelData")
+	public Object[][] getExcelLoginData(){
+		String path = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
+				+ File.separator + "resources" + File.separator + "testdata" + File.separator + "LoginTestData.xlsx";
+		return ExcelUtils.getExcelData(path, "Sheet1");
+	}
 }
-
-
-
-

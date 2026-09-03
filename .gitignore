@@ -11,6 +11,7 @@ failsafe-reports/
 # ExtentReports output (used in this project)
 ExtentReport/
 reports/
+ScreenShots/
 
 # Eclipse
 .settings/

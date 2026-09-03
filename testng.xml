@@ -5,10 +5,10 @@
 	</listeners>
 	<test name="Admin Panel Tests">
 		<parameter name="Browser" value="chrome"></parameter>
-		<parameter name="Headless" value="false"></parameter>
+		<parameter name="Headless" value="true"></parameter>
 		<classes>
 			<class name="com.groceryadmin.automation.tests.LoginTestCases" />
-			<!--<class name="com.groceryadmin.automation.tests.HomeTestCases" />
+			<class name="com.groceryadmin.automation.tests.HomeTestCases" />
 			<class name="com.groceryadmin.automation.tests.ManageDeliveryBoyTestCases" />
 			<class name="com.groceryadmin.automation.tests.MobileSliderTestCases" />
 			<class name="com.groceryadmin.automation.tests.PushNotificationsTestCases" />
@@ -17,7 +17,7 @@
 			<class name="com.groceryadmin.automation.tests.ManageOrdersTestCases" />
 			<class name="com.groceryadmin.automation.tests.ManageProductTestCases" />
 			<class name="com.groceryadmin.automation.tests.ManageLocationTestCases" />
-			<class name="com.groceryadmin.automation.tests.AdminUsersTestCases" />-->
+			<class name="com.groceryadmin.automation.tests.AdminUsersTestCases" />
 		</classes>
 	</test>
 </suite>
