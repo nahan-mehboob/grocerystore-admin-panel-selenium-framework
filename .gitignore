@@ -9,6 +9,7 @@ surefire-reports/
 failsafe-reports/
 
 # ExtentReports output (used in this project)
+ExtentReport/
 reports/
 
 # Eclipse
