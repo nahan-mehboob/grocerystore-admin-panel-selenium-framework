@@ -25,7 +25,7 @@ public class BaseTest {
 	
 	public static void testBasic() throws IOException {
 		prop = new Properties();
-		FileInputStream fileIo = new FileInputStream(System.getProperty("user.dir")+"//src//main//resources//Properties//Config.properties");
+		FileInputStream fileIo = new FileInputStream(System.getProperty("user.dir")+"//src//test//resources//Config.properties");
 		prop.load(fileIo); //loading config.property file
 	}
 	

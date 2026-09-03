@@ -24,7 +24,7 @@
 						<suiteXmlFile>testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<systemPropertyVariables>
-						<!--<browser>${browser}</browser>-->					
+						<browser>${browser}</browser>		
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>4.18.1</version>
+			<version>4.13.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -55,12 +55,12 @@
 		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
-			<version>5.1.1</version>
+			<version>5.0.9</version>
 		</dependency>
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
-			<version>5.6.3</version>
+			<version>6.3.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.javafaker</groupId>
