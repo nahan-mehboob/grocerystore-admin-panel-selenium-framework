@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Retry Suite">
+	<listeners>
+		<listener class-name="com.groceryadmin.automation.listeners.AnnotationTransformer"></listener>
+		<listener class-name="com.groceryadmin.automation.listeners.ExtentReportManager" />
+	</listeners>
+	<test name="Retry on Failure">
+		<parameter name="Browser" value="chrome"></parameter>
+		<parameter name="Headless" value="false"></parameter>
+		<classes>
+			<class name="com.groceryadmin.automation.tests.ManageProductTestCases">
+			</class>
+		</classes>
+	</test>
+</suite>

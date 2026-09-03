@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="GroceryStore Regression Suite">
+	<listeners>
+		<listener class-name="com.groceryadmin.automation.listeners.ExtentReportManager" />
+	</listeners>
+	<test name="Regression Tests">
+		<parameter name="Browser" value="chrome" />
+		<parameter name="Headless" value="false" />
+		<groups>
+			<run>
+				<include name="regression" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.groceryadmin.automation.tests.LoginTestCases" />
+			<class name="com.groceryadmin.automation.tests.HomeTestCases" />
+			<class name="com.groceryadmin.automation.tests.ManageDeliveryBoyTestCases" />
+			<class name="com.groceryadmin.automation.tests.MobileSliderTestCases" />
+			<class name="com.groceryadmin.automation.tests.PushNotificationsTestCases" />
+			<class name="com.groceryadmin.automation.tests.ManageExpenseTestCases" />
+			<class name="com.groceryadmin.automation.tests.SettingsPageTestCases" />
+			<class name="com.groceryadmin.automation.tests.ManageOrdersTestCases" />
+			<class name="com.groceryadmin.automation.tests.ManageProductTestCases" />
+			<class name="com.groceryadmin.automation.tests.ManageLocationTestCases" />
+			<class name="com.groceryadmin.automation.tests.AdminUsersTestCases" />
+		</classes>
+	</test>
+</suite>

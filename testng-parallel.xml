@@ -1,0 +1,13 @@
+<suite name="Parallel Execution Suite">
+	<listeners>
+		<listener class-name="com.groceryadmin.automation.listeners.ExtentReportManager" />
+	</listeners>
+	<test name="Parallel Tests" parallel="Methods" thread-count="2">
+		<parameter name="Browser" value="chrome" />
+		<parameter name="Headless" value="false" />
+		<classes>
+			<class name="com.groceryadmin.automation.tests.PushNotificationsTestCases" />
+			<class name="com.groceryadmin.automation.tests.ManageOrdersTestCases" />
+		</classes>
+	</test>
+</suite>

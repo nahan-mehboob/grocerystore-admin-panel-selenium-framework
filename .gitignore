@@ -1,0 +1,35 @@
+# Maven
+target/
+
+# TestNG generated output
+test-output/
+
+# Surefire/Failsafe reports (in case they land outside test-output/)
+surefire-reports/
+failsafe-reports/
+
+# ExtentReports output (used in this project)
+reports/
+
+# Eclipse
+.settings/
+.classpath
+.project
+bin/
+
+# IntelliJ (harmless to keep even if you're on Eclipse — protects you if you ever switch)
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Compiled class files
+*.class
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

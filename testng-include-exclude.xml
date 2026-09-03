@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Include Exclude Suite">
+	<listeners>
+		<listener class-name="com.groceryadmin.automation.listeners.ExtentReportManager" />
+	</listeners>
+	<test name="Selective Tests">
+		<parameter name="Browser" value="chrome"></parameter>
+		<parameter name="Headless" value="false"></parameter>
+		<classes>
+			<class name="com.groceryadmin.automation.tests.LoginTestCases">
+				<methods>
+					<include name="profileNameStyleValidation"></include>
+				</methods>
+			</class>
+			<class name="com.groceryadmin.automation.tests.ManageProductTestCases">
+				<methods>
+					<exclude name="validateUploadedFileIsPreviewDisplayed"></exclude>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>

@@ -1,0 +1,33 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Cross Browser Suite">
+	<listeners>
+		<listener class-name="com.groceryadmin.automation.listeners.ExtentReportManager" />
+	</listeners>
+	<test name="Chrome Tests">
+		<parameter name="Browser" value="chrome"></parameter>
+		<parameter name="Headless" value="false"></parameter>
+		<classes>
+			<class name="com.groceryadmin.automation.tests.LoginTestCases"></class>
+			<class name="com.groceryadmin.automation.tests.PushNotificationsTestCases"></class>
+			<class name="com.groceryadmin.automation.tests.AdminUsersTestCases"></class>
+		</classes>
+	</test>
+	<test name="Firefox Tests">
+		<parameter name="Browser" value="firefox"></parameter>
+		<parameter name="Headless" value="false"></parameter>
+		<classes>
+			<class name="com.groceryadmin.automation.tests.LoginTestCases"></class>
+			<class name="com.groceryadmin.automation.tests.PushNotificationsTestCases"></class>
+			<class name="com.groceryadmin.automation.tests.AdminUsersTestCases"></class>
+		</classes>
+	</test>
+	<test name="Edge Tests">
+		<parameter name="Browser" value="edge"></parameter>
+		<parameter name="Headless" value="false"></parameter>
+		<classes>
+			<class name="com.groceryadmin.automation.tests.LoginTestCases"></class>
+			<class name="com.groceryadmin.automation.tests.PushNotificationsTestCases"></class>
+			<class name="com.groceryadmin.automation.tests.AdminUsersTestCases"></class>
+		</classes>
+	</test>
+</suite>
