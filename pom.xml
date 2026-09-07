@@ -24,12 +24,19 @@
 						<suiteXmlFile>testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<systemPropertyVariables>
-						<browser>${browser}</browser>		
+						<headless>${headless}</headless>
+						<!--<browser>${browser}</browser>bridges -Dbrowser from the outer mvn process into the forked test JVM. reference for what command-line override would look like-->
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	<properties>
+		<headless>false</headless>
+		<!--<browser>chrome</browser> browser value fetched by deafult if -Dbrowser is not passed in cmd, My cross-browser suite intentionally uses three different browser values across three blocks in one suite file, so a global -Dbrowser override would silently collapse all three to just one browser, defeating the suite's purpose
+		Surefire forks a separate JVM for tests, which does not inherit -D flags from the outer `mvn`process unless systemPropertyVariables explicitly bridges them, that is it can't fetch from parameter tags in suite xml files but need a separate properties tag in pom since it can only fetch pom level values
+		-->
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>

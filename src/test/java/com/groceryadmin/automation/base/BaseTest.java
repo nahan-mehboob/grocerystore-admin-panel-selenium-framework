@@ -30,19 +30,19 @@ public class BaseTest {
 	}
 	
 	
-	@Parameters({"Browser", "Headless"})
+	@Parameters({"Browser", "Headless"}) //"Headless" is @Optional("false") so any suite XML that doesn't declare it at all still runs fine, non-headless, with zero XML changes required.
 	@BeforeMethod(alwaysRun = true)
-	public void beforeMethod(String browser, @Optional("false") String headless) throws IOException {
-		//boolean isHeadless = Boolean.parseBoolean(headless);
-		boolean isHeadless = System.getProperty("headless") != null
+	public void beforeMethod(String browser, @Optional("false") String headlessParam) throws IOException {
+		boolean isHeadless =  System.getProperty("headless") != null
 				? Boolean.parseBoolean(System.getProperty("headless"))
-				: Boolean.parseBoolean(headless);
+				: Boolean.parseBoolean(headlessParam);
+
 		if(browser.equals("chrome")) {
 			testBasic();
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
 			if(isHeadless) {
-				options.addArguments("--headless=new");
+				options.addArguments("--headless=new"); //"--headless=new" is Chrome's modern headless mode, this is given because headless mode has no real window to maximize later, and layout-dependent assertions can fail
 				options.addArguments("--window-size=1920,1080");
 			}
 			driver  = new ChromeDriver(options);
@@ -52,7 +52,7 @@ public class BaseTest {
 			WebDriverManager.edgedriver().setup();
 			EdgeOptions options = new EdgeOptions();
 			if(isHeadless) {
-				options.addArguments("--headless=new");
+				options.addArguments("--headless=new"); 
 				options.addArguments("--window-size=1920,1080");
 			}
 			driver  = new EdgeDriver(options);
@@ -78,3 +78,13 @@ public class BaseTest {
 		driver.quit();
 	}
 }
+
+/* command-line override, kept here as a reference for what the bridging logic would look like if ever revisited
+
+public void beforeMethod(String browserParam, @Optional("false") String headlessParam) throws IOException {
+String browser = System.getProperty("browser") != null
+		? System.getProperty("browser")
+		: browserParam;
+boolean isHeadless = System.getProperty("headless") != null
+		? Boolean.parseBoolean(System.getProperty("headless"))
+		: Boolean.parseBoolean(headlessParam); */

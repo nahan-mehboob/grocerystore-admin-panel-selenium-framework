@@ -2,7 +2,7 @@ package com.groceryadmin.automation.constants;
 
 public class Constants {
 	public static final String EXPECTED_PROFILE_NAME= "Admin";
-	public static final String LOGIN_ERROR = "Invalid Login";
+	public static final String LOGIN_ERROR = "\r\n"+ "Invalid Username/Password";
 	public static final String EXPECTED_PROFILE_CLR = "rgba(255, 255, 255, 0.75)";
 	public static final String STYLE_ERROR = "Color is not as expected ";
 	public static final String CHECKBOX_ERROR = "Checkbox status is not as expected";

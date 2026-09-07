@@ -5,17 +5,18 @@
 	</listeners>
 	<test name="Selective Tests">
 		<parameter name="Browser" value="chrome"></parameter>
-		<parameter name="Headless" value="false"></parameter>
+		<parameter name="Headless" value="true"></parameter>
 		<classes>
 			<class name="com.groceryadmin.automation.tests.LoginTestCases">
 				<methods>
-					<include name="profileNameStyleValidation"></include>
+					<include name="loginFailureWithInvalidCredentials"></include>
+					<include name="validateLoginWithEmptyCredentials"></include>
 				</methods>
-			</class>
-			<class name="com.groceryadmin.automation.tests.ManageProductTestCases">
+
+				<!-- <class name="com.groceryadmin.automation.tests.ManageProductTestCases">
 				<methods>
 					<exclude name="validateUploadedFileIsPreviewDisplayed"></exclude>
-				</methods>
+				</methods>-->
 			</class>
 		</classes>
 	</test>

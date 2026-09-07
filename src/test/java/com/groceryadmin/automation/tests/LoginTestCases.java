@@ -14,7 +14,7 @@ import com.groceryadmin.automation.utils.ExcelUtils;
 public class LoginTestCases extends BaseTest{
 	LoginPage lp;
 
-	@Test(priority=1, description="Validating the profile name of logged user")
+	@Test(priority=1, description="Validating the profile name of logged user", groups = {"smoke"})
 	public void loggedInProfileNameValidation() {
 		lp = new LoginPage(driver);
 		lp.presteps();
@@ -23,7 +23,7 @@ public class LoginTestCases extends BaseTest{
 		Assert.assertEquals(actualProfileName, expectedProfileName,Constants.LOGIN_ERROR);
 	}
 
-	@Test(priority = 2, description="Login using data provider", dataProvider = "data")
+	@Test(priority = 2, description="Login using data provider", dataProvider = "loginData", groups = {"regression"})
 	public void loginFailureWithInvalidCredentials(String username, String password) {
 		lp = new LoginPage(driver);
 		lp.getUserName(username);
@@ -33,7 +33,7 @@ public class LoginTestCases extends BaseTest{
 		Assert.assertTrue(actualResult,Constants.LOGIN_ERROR);
 	}
 
-	@Test(priority=3, description="Validating color property of profile name")
+	@Test(priority=3, description="Validating color property of profile name", groups = {"sanity"})
 	public void profileNameStyleValidation() {
 		lp = new LoginPage(driver);
 		lp.presteps();
@@ -42,7 +42,7 @@ public class LoginTestCases extends BaseTest{
 		Assert.assertEquals(actualProfileColor, expectedProfileClr,Constants.STYLE_ERROR);
 	}
 
-	@Test(priority = 4, description = "Validating whether remember checkbox is unchecked")
+	@Test(priority = 4, description = "Validating whether remember checkbox is unchecked", groups = {"sanity"})
 	public void validationOfRememberMeCheckbox() {
 		lp = new LoginPage(driver);
 		lp.getUserName("admin");
@@ -52,7 +52,7 @@ public class LoginTestCases extends BaseTest{
 		Assert.assertEquals(actualStatus, expectedStatus,Constants.CHECKBOX_ERROR);
 	}
 
-	@Test(priority=5, description="Login using excel data", dataProvider = "excelData")
+	@Test(priority=5, description="Login using excel data", dataProvider = "excelData",groups = {"regression"})
 	public void excelRead(String username, String password) {
 		lp = new LoginPage(driver);
 		lp.excelSteps(username, password);
@@ -60,9 +60,26 @@ public class LoginTestCases extends BaseTest{
 		String actualProfileName = lp.profileNameVerification();
 		Assert.assertEquals(actualProfileName, expectedProfileName,Constants.LOGIN_ERROR);
 	}
+	
+	@Test(priority = 6, description = "Validating that login fails when both fields are submitted empty", groups = {"regression","negative"})
+	public void validateLoginWithEmptyCredentials() {
+		lp = new LoginPage(driver);
+		lp.clickSignin();
+		Boolean actualResult = lp.signinFailAlert();
+		Assert.assertTrue(actualResult, Constants.LOGIN_ERROR);
+	}
+	
+	@Test(priority = 7, description = "Validating that login fails when password field is empty", groups = {"regression","negative"})
+	public void validateLoginWithEmptyPassword() {
+		lp = new LoginPage(driver);
+		lp.getUserName("admin");
+		lp.clickSignin();
+		Boolean actualResult = lp.signinFailAlert();
+		Assert.assertTrue(actualResult, Constants.LOGIN_ERROR);
+	}
 
-	@DataProvider(name = "data")
-	public Object [][] getuserData(){
+	@DataProvider(name = "loginData")
+	public Object [][] getUserData(){
 		return new Object[][] {
 			{"admin5", "admin"},
 			{"admin", "admin4"},
