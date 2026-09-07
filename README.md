@@ -1,5 +1,7 @@
 # GroceryStore Admin Panel — Selenium Automation Framework
 
+## Overview
+
 A self-initiated Selenium WebDriver + TestNG automation framework built to develop hands-on test automation skills alongside manual QA experience. This project automates functional and UI regression testing for a grocery store admin panel, applying Page Object Model design, data-driven testing, and multi-browser/parallel execution patterns.
 
 ## Application Under Test
@@ -70,7 +72,7 @@ grocerystore-admin-panel-selenium-framework/
             └── testdata/           (Excel test data + upload image)
 ```
 
-## How to Run
+## Running the Tests
 
 **Full suite (default):**
 
@@ -118,15 +120,11 @@ ExtentReport/ExtentReport_<ddMMyyyy_hhmmss>.html
 
 Each run creates a new, separately timestamped file rather than overwriting the previous one — a full run history is preserved in this folder across multiple executions.
 
-## Design Decisions
+## Framework Design
 
-- **Page Object Model with PageFactory** — separates element locators from test logic, so a UI change means editing one page class rather than hunting through every test that touches that element.
-- **Centralized `Constants` class** — every expected value (text, color, URL, alert message) lives in one place instead of being duplicated as string literals across 11+ test classes, so an expected-value change is a one-line edit, not a find-and-replace across the codebase.
-- **WebDriverManager over manually managed driver binaries** — resolves the correct driver automatically per machine/OS, removing the need to check `.exe` files into source control or hardcode driver paths.
-- **ExtentReports with screenshots embedded on failure** — the reporting listener hooks into TestNG's lifecycle so a screenshot is captured and attached to the failing test entry automatically, with no per-test-class reporting code required.
-- **Multiple purpose-built suite XMLs rather than one** — smoke/sanity/regression suites mirror the same test-classification approach used in manual QA test planning, while the mechanism-focused suites (cross-browser, parallel, retry, include/exclude) each isolate one TestNG capability for review independent of the others.
-- **Headless is command-line overridable, browser is not — a deliberate asymmetry, not an oversight** — Surefire forks one JVM per run, so a bridged system property applies globally across every <test> block in that run. testng-crossbrowser.xml intentionally uses different Browser values across its three blocks in a single run, so a global -Dbrowser override would silently collapse all three to one browser — ruled out. No suite here varies Headless within a single run, so -Dheadless has no such conflict and is safely overridable.
-
-## About This Project
-
-Built independently while working as a QA Analyst (1.5 years, manual and functional testing) to develop automation skills beyond manual testing — applying real QA judgment (smoke/sanity/regression/negative test classification, edge-case thinking) to an automated framework rather than treating automation as a separate skill from manual QA process.
+- **Page Object Model + PageFactory.** Locators live in the page classes, not scattered across 11 test classes — one place to update when the UI changes.
+- **Centralized `Constants` class** for expected text/colors/URLs/alerts instead of string literals repeated everywhere.
+- **WebDriverManager** instead of checked-in driver `.exe` files. One less thing to break when someone clones this on a different machine.
+- **ExtentReports + screenshot-on-failure**, wired through the TestNG listener so it's automatic — no per-test reporting code.
+- **Separate suite XMLs instead of one monolith.** Smoke/sanity/regression map to how manual QA usually buckets test coverage; cross-browser, parallel, and retry each get their own suite so each mechanism can be run and reviewed on its own.
+- **Headless is overridable via `-Dheadless`, browser is not.** Surefire runs everything in one JVM per suite, so a system property applies suite-wide. That's fine for headless since no suite mixes headless/non-headless in one run — but `testng-crossbrowser.xml` deliberately runs Chrome/Firefox/Edge in the same run, so a global browser override would collapse all three into one. Left that one hardcoded on purpose.
