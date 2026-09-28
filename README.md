@@ -2,7 +2,7 @@
 
 ## Overview
 
-A self-initiated Selenium WebDriver + TestNG automation framework built to develop hands-on test automation skills alongside manual QA experience. This project automates functional and UI regression testing for a grocery store admin panel, applying Page Object Model design, data-driven testing, and multi-browser/parallel execution patterns.
+This is a Selenium WebDriver with TestNG automation framework built to develop hands-on test automation skills alongside manual QA experience. This project automates functional and UI regression testing for a grocery store admin panel, applying Page Object Model design, data-driven testing, and multi-browser/parallel execution patterns.
 
 ## Application Under Test
 
